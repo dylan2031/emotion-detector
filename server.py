@@ -14,19 +14,25 @@ def emotion_analysis():
     # Get emotion analysis
     analysis_result = emotion_detector(text_to_analyze)
 
-    # Response part 1
-    response = "For the given statement, the system response is"
+    # Error handling
+    if analysis_result["dominant_emotion"] is None:
+        # If 400, response variable is error message
+        response = "Invalid text! Please try again!"
+    else:
+        #if no errors, create response
+        # Response part 1
+        response = "For the given statement, the system response is"
 
-    # Exclude dominant emotion. It is returned seperately.
-    for key, value in analysis_result.items():
-        if key != "dominant_emotion":
-            response += f" '{key}': {value},"
+        # Exclude dominant emotion. It is returned seperately.
+        for key, value in analysis_result.items():
+            if key != "dominant_emotion":
+                response += f" '{key}': {value},"
 
-    # Replace the last comma with a period
-    response = response.rstrip(",") + "."
+        # Replace the last comma with a period
+        response = response.rstrip(",") + "."
 
-    # Add dominant emotion to response (response part 2)
-    response += f" The dominant emotion is {analysis_result['dominant_emotion']}."
+        # Add dominant emotion to response (response part 2)
+        response += f" The dominant emotion is {analysis_result['dominant_emotion']}."
 
     return response
 
