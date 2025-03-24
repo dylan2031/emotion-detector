@@ -32,7 +32,7 @@ def emotion_analysis():
         response = response.rstrip(",") + "."
 
         # Add dominant emotion to response (response part 2)
-        response += f" The dominant emotion is {analysis_result['dominant_emotion']}."
+        response += f"<br><br><strong>The dominant emotion is {analysis_result['dominant_emotion']}.</strong>"
 
     return response
 
